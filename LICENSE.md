@@ -1,8 +1,9 @@
 This is a school assignment hosted on GitHub. Since it's on GitHub anyway,
-everyone is allowed to do anything with it except share or redistribute it.
-Since it's a school assignment, any professor or TA for a class we're turning
-it in for is also allowed to do whatever they have to do with it to teach the
-class, even if that includes sharing or redistributing it.
+everyone is allowed to do anything with it except share or redistribute any
+portion of it. Since it's a school assignment, any professor or TA for a class
+we're turning it in for is also allowed to do whatever they have to do with it
+to teach the class, even if that includes sharing or redistributing any portion
+of it.
 
 THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHORS DISCLAIM ALL WARRANTIES WITH
 REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND
