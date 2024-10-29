@@ -1,2 +1,2 @@
 class_name PlayerCharacter
-extends AnimatedSprite2D
+extends CharacterBody2D
