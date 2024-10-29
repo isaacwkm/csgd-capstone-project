@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://c0wsxwohhxunj"]
+
+[ext_resource type="Script" path="res://objects/player_character/player_character.gd" id="1_hytix"]
+[ext_resource type="SpriteFrames" uid="uid://dgysm1sfxmdaf" path="res://textures/player_character_placeholder/player_character_placeholder.tres" id="1_lipw5"]
+
+[node name="PlayerCharacter" type="AnimatedSprite2D"]
+sprite_frames = ExtResource("1_lipw5")
+animation = &"stand_right"
+offset = Vector2(0, -48)
+script = ExtResource("1_hytix")
