@@ -1,4 +1,5 @@
-extends Node2D
+class_name Candle
+extends RigidBody2D
 
 var picked = false
 
