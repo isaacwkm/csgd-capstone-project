@@ -16,7 +16,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if picked:
 		global_position = _player.global_position + Vector2.UP*48
-		linear_velocity = Vector2.ZERO
+		linear_velocity = _player.get_real_velocity()
 
 func _input(event: InputEvent) -> void:
 	if (
