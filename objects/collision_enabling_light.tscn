@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://c3338cj6v4v6v" path="res://textures/point_light.png" id="2_cdknk"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ppycv"]
-radius = 384.0
+radius = 448.0
 
 [node name="CollisionEnablingLight" type="Area2D"]
 collision_layer = 2
