@@ -26,3 +26,6 @@ position = Vector2(95, 604)
 
 [node name="Candle" parent="." instance=ExtResource("6_of56d")]
 position = Vector2(200, 604)
+
+[node name="Candle2" parent="." instance=ExtResource("6_of56d")]
+position = Vector2(750, 135)
