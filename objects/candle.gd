@@ -13,6 +13,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if picked:
 		global_position = _player.global_position
+		linear_velocity = Vector2.ZERO
 
 func _input(event: InputEvent) -> void:
 	if(Input.is_key_pressed(KEY_E)):
