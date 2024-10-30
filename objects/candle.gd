@@ -14,6 +14,10 @@ func _physics_process(delta: float) -> void:
 
 func _input(event: InputEvent) -> void:
 	if(Input.is_key_pressed(KEY_E)):
-		if get_node("../PlayerCharacter").canPick == true:
-			picked = true
-			get_node("../PlayerCharacter").canPick = false
+		if picked:
+			picked = false
+			get_node("../PlayerCharacter").canPick = true
+		else:
+			if get_node("../PlayerCharacter").canPick == true:
+				picked = true
+				get_node("../PlayerCharacter").canPick = false
