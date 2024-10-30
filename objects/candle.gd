@@ -12,7 +12,7 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
 	if picked:
-		self.position = _player.global_position
+		global_position = _player.global_position
 
 func _input(event: InputEvent) -> void:
 	if(Input.is_key_pressed(KEY_E)):
