@@ -38,12 +38,12 @@ func _physics_process(delta):
 
 	# Handle jump/fall animations if in the air
 	if not is_on_floor():
-		if direction == 1:  # Moving right
+		if facingRight:  # Moving right
 			if velocity.y < 0:  # Ascending
 				update_animation("jump_right" if hasCandle else "jump_right_no_candle")
 			elif velocity.y > 0:  # Descending
 				update_animation("fall_right" if hasCandle else "fall_right_no_candle")
-		elif direction == -1:  # Moving left
+		else:  # Moving left
 			if velocity.y < 0:  # Ascending
 				update_animation("jump_left" if hasCandle else "jump_left_no_candle")
 			elif velocity.y > 0:  # Descending
