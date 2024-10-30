@@ -19,7 +19,10 @@ func _physics_process(delta: float) -> void:
 		linear_velocity = Vector2.ZERO
 
 func _input(event: InputEvent) -> void:
-	if(Input.is_key_pressed(KEY_E)):
+	if (
+		event is InputEventKey and event.is_released()
+		and event.keycode == KEY_E
+	):
 		if picked:
 			picked = false
 			_player.canPick = true
