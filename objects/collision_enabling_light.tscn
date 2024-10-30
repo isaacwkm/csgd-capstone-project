@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://du4aw7x0lt5a7"]
 
-[ext_resource type="Script" path="res://scripts/exclusive_collision_area.gd" id="1_qcllp"]
+[ext_resource type="Script" path="res://objects/exclusive_collision_area.gd" id="1_qcllp"]
 [ext_resource type="Texture2D" uid="uid://c3338cj6v4v6v" path="res://textures/point_light.png" id="2_cdknk"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ppycv"]
