@@ -15,14 +15,11 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
 	if picked:
-		global_position = _player.global_position + Vector2.UP*48
+		global_position = _player.global_position + Vector2.UP*32
 		linear_velocity = _player.get_real_velocity()
 
 func _input(event: InputEvent) -> void:
-	if (
-		event is InputEventKey and event.is_released()
-		and event.keycode == KEY_E
-	):
+	if event.is_action_released("pick_up"):
 		if picked:
 			picked = false
 			_player.canPick = true

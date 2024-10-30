@@ -14,16 +14,16 @@ var canPick = true
 
 func _physics_process(delta):
 	# Handle jump
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 
 	# Get the input direction and handle movement
 	var direction = 0
-	if Input.is_key_pressed(KEY_A):
+	if Input.is_action_pressed("move_left"):
 		direction -= 1
 		facingRight = false
 		update_animation("walk_left" if hasCandle else "walk_left_no_candle")
-	elif Input.is_key_pressed(KEY_D):
+	elif Input.is_action_pressed("move_right"):
 		direction += 1
 		facingRight = true
 		update_animation("walk_right" if hasCandle else "walk_right_no_candle")
