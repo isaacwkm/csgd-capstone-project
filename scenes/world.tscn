@@ -4,13 +4,14 @@
 [ext_resource type="Material" uid="uid://bweju42buun6p" path="res://shaders/only_visible_in_light.tres" id="1_h8m8k"]
 [ext_resource type="TileSet" uid="uid://dg1io4ume71hh" path="res://textures/tileset/tileset.tres" id="2_13mpi"]
 [ext_resource type="Script" path="res://scripts/screen_overlay.gd" id="2_h6ad5"]
-[ext_resource type="Texture2D" uid="uid://c3338cj6v4v6v" path="res://textures/point_light.png" id="5_vhnmy"]
+[ext_resource type="PackedScene" uid="uid://du4aw7x0lt5a7" path="res://objects/collision_enabling_light.tscn" id="5_5dqrt"]
 
 [node name="World" type="Node2D"]
 material = ExtResource("1_h8m8k")
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
 editor_only = true
+energy = 0.25
 
 [node name="ScreenOverlay" type="Node2D" parent="."]
 script = ExtResource("2_h6ad5")
@@ -23,8 +24,8 @@ tile_set = ExtResource("2_13mpi")
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("1_grg2j")]
 position = Vector2(95, 604)
+collision_layer = 2
+collision_mask = 2
 
-[node name="PointLight2D" type="PointLight2D" parent="PlayerCharacter"]
-position = Vector2(0, -48)
-scale = Vector2(0.402344, 0.402344)
-texture = ExtResource("5_vhnmy")
+[node name="CollisionEnablingLight" parent="." instance=ExtResource("5_5dqrt")]
+position = Vector2(236, 464)
