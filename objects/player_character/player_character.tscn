@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cci2vignjb6u4"]
 
-[ext_resource type="Script" path="res://objects/player_character/player_character.gd" id="1_hytix"]
+[ext_resource type="Script" path="res://scripts/player_character.gd" id="1_hytix"]
 [ext_resource type="SpriteFrames" uid="uid://dgysm1sfxmdaf" path="res://textures/player_character_placeholder/player_character_placeholder.tres" id="1_lipw5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v2bua"]
@@ -11,7 +11,7 @@ script = ExtResource("1_hytix")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("1_lipw5")
-animation = &"stand_right"
+animation = &"stand_left"
 offset = Vector2(0, -48)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
