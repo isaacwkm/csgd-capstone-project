@@ -9,6 +9,9 @@
 [node name="World" type="Node2D"]
 material = ExtResource("1_h8m8k")
 
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+editor_only = true
+
 [node name="ScreenOverlay" type="Node2D" parent="."]
 script = ExtResource("2_h6ad5")
 color = Color(0.156839, 0.127325, 0.142356, 1)
