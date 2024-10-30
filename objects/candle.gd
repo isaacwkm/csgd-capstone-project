@@ -15,7 +15,7 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
 	if picked:
-		global_position = _player.global_position
+		global_position = _player.global_position + Vector2.UP*48
 		linear_velocity = Vector2.ZERO
 
 func _input(event: InputEvent) -> void:
