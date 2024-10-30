@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://c10ag7q27cfy6" path="res://textures/player_character_placeholder/player_character_placeholder_candle_8.tres" id="1_lduu1"]
 [ext_resource type="Script" path="res://objects/candle.gd" id="1_r3eed"]
-[ext_resource type="Texture2D" uid="uid://c3338cj6v4v6v" path="res://textures/point_light.png" id="3_vf61n"]
+[ext_resource type="PackedScene" uid="uid://du4aw7x0lt5a7" path="res://objects/collision_enabling_light.tscn" id="3_1623e"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_gdbwp"]
 animations = [{
@@ -41,5 +41,5 @@ shape = SubResource("RectangleShape2D_xsagg")
 position = Vector2(0, -21)
 shape = SubResource("RectangleShape2D_yawxj")
 
-[node name="PointLight2D" type="PointLight2D" parent="."]
-texture = ExtResource("3_vf61n")
+[node name="CollisionEnablingLight" parent="." instance=ExtResource("3_1623e")]
+scale = Vector2(0.378182, 0.378182)
