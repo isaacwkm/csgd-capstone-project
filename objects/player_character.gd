@@ -10,7 +10,7 @@ const GRAVITY = 980.0  # Define gravity here
 var hasCandle = true
 var current_animation = ""  # Track the current animation
 var facingRight = true
-var canPick = true
+var heldItem: Node2D = null
 
 func _physics_process(delta):
 	# Handle jump
