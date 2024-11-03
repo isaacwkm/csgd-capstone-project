@@ -1,3 +1,4 @@
+class_name Reticle
 extends Sprite2D
 
 @export var stick_sensitivity: float = 300.0

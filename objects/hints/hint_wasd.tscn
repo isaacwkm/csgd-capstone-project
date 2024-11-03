@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://bfxlda5mtl1ug"]
+
+[ext_resource type="Script" path="res://objects/hints/hint_wasd.gd" id="1_i6mrm"]
+[ext_resource type="Texture2D" uid="uid://brqe37fp4ey04" path="res://textures/hint_wasd.png" id="1_n5m1b"]
+
+[node name="HintWASD" type="Sprite2D"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_n5m1b")
+script = ExtResource("1_i6mrm")

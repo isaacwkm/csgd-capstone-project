@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://bttqslxrjktie"]
+
+[ext_resource type="Texture2D" uid="uid://cd2hte3ii87t6" path="res://textures/hint_leftclick.png" id="1_3qxsv"]
+[ext_resource type="Script" path="res://objects/hints/hint_left_click.gd" id="1_sfb1k"]
+
+[node name="HintLeftClick" type="Sprite2D"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_3qxsv")
+script = ExtResource("1_sfb1k")

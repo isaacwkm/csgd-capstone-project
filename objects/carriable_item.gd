@@ -30,3 +30,6 @@ func _on_body_entered(body: Node2D):
 func _on_body_exited(body: Node2D):
 	if body == _player:
 		in_contact = false
+
+func is_carried():
+	return _player.heldItem == self

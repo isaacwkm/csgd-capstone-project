@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://bap24b7bpvkba"]
+
+[ext_resource type="Texture2D" uid="uid://csxx4tvb3xeti" path="res://textures/hint_e.png" id="1_j1h82"]
+[ext_resource type="Script" path="res://objects/hints/hint_e.gd" id="1_ufw2j"]
+
+[node name="HintE" type="Sprite2D"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_j1h82")
+script = ExtResource("1_ufw2j")
