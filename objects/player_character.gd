@@ -109,6 +109,7 @@ func update_animation(animation_name):
 	if current_animation != animation_name:
 		_animated_sprite.play(animation_name)
 		current_animation = animation_name
+		non_moving_animation_timer = INF
 		if in_non_moving_animation():
 			non_moving_animation_timer = (
 				NON_MOVING_ANIMATION_DURATIONS[current_animation]
@@ -142,4 +143,7 @@ func _spawn_candle() -> void:
 		)
 		
 		# play break animation
-		
+		if facingRight:
+			update_animation(&'break_candle_right')
+		else:
+			update_animation(&'break_candle_left')
