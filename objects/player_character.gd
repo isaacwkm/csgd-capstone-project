@@ -13,7 +13,7 @@ const GRAVITY = 980.0  # Define gravity here
 
 @export var throw_strength: float = 3.0
 @export var dislodge_threshold: float = 1.0
-@export var dislodge_speed: float = 64.0
+@export var dislodge_speed: float = 32.0
 
 const NON_MOVING_ANIMATION_DURATIONS := {
 	&'break_candle_left': 0.25,
@@ -128,8 +128,18 @@ func _dislodge_from_overlap():
 		var collision = get_slide_collision(i)
 		if collision.get_depth() > dislodge_threshold:
 			velocity = Vector2.ZERO
-			global_position += Vector2.UP*dislodge_speed
+			global_position += _get_opposing_direction()*dislodge_speed
 			break
+
+func _get_opposing_direction() -> Vector2:
+	var result = Vector2.UP
+	if Input.is_action_pressed(&'jump'):
+		result = Vector2.DOWN
+	if Input.is_action_pressed(&'move_left'):
+		result += Vector2.RIGHT
+	if Input.is_action_pressed(&'move_right'):
+		result += Vector2.LEFT
+	return result
 
 func _unhandled_input(event: InputEvent):
 	if event.is_action_pressed(&'throw') and heldItem:
