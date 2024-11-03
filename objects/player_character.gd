@@ -12,6 +12,8 @@ const JUMP_VELOCITY = -400.0
 const GRAVITY = 980.0  # Define gravity here
 
 @export var throw_strength: float = 3.0
+@export var dislodge_threshold: float = 1.0
+@export var dislodge_speed: float = 64.0
 
 const NON_MOVING_ANIMATION_DURATIONS := {
 	&'break_candle_left': 0.25,
@@ -119,6 +121,15 @@ func _physics_process(delta):
 		non_moving_animation_timer -= delta
 
 	move_and_slide()
+	_dislodge_from_overlap()
+
+func _dislodge_from_overlap():
+	for i in get_slide_collision_count():
+		var collision = get_slide_collision(i)
+		if collision.get_depth() > dislodge_threshold:
+			velocity = Vector2.ZERO
+			global_position += Vector2.UP*dislodge_speed
+			break
 
 func _unhandled_input(event: InputEvent):
 	if event.is_action_pressed(&'throw') and heldItem:
