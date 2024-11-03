@@ -26,25 +26,21 @@ var facingRight = true
 var heldItem: CarriableItem = null
 var non_moving_animation_timer: float = INF
 
-func _physics_process(delta):
+func _handle_normal_input(_delta):
 	# Handle jump
-	if Input.is_action_just_pressed("jump") and is_on_floor() and not (
-		in_non_moving_animation()
-	):
+	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 
 	# Get the input direction and handle movement
 	var direction = 0
-	if Input.is_action_pressed("move_left") and not in_non_moving_animation():
+	if Input.is_action_pressed("move_left"):
 		direction -= 1
 		facingRight = false
 		update_animation(
 			"walk_left" if hasOwnCandle
 			else "walk_left_no_candle"
 		)
-	elif Input.is_action_pressed("move_right") and not (
-		in_non_moving_animation()
-	):
+	elif Input.is_action_pressed("move_right"):
 		direction += 1
 		facingRight = true
 		update_animation(
@@ -57,19 +53,15 @@ func _physics_process(delta):
 	if direction == 0:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
-	# Add gravity
-	if not is_on_floor():
-		velocity.y += GRAVITY * delta
-
 	# Handle jump/fall animations if in the air
-	if not is_on_floor() and not in_non_moving_animation():
+	if not is_on_floor():
 		if facingRight:  # Moving right
 			if velocity.y < 0:  # Ascending
 				update_animation(
 					"jump_right" if hasOwnCandle
 					else "jump_right_no_candle"
 				)
-			elif velocity.y > 0:  # Descending
+			else:  # Descending
 				update_animation(
 					"fall_right" if hasOwnCandle
 					else "fall_right_no_candle"
@@ -80,14 +72,14 @@ func _physics_process(delta):
 					"jump_left" if hasOwnCandle
 					else "jump_left_no_candle"
 				)
-			elif velocity.y > 0:  # Descending
+			else:  # Descending
 				update_animation(
 					"fall_left" if hasOwnCandle
 					else "fall_left_no_candle"
 				)
 
 	# Stop animation when velocity is zero
-	if velocity.x == 0 and velocity.y == 0 and not in_non_moving_animation():
+	if velocity.x == 0 and velocity.y == 0:
 		if facingRight:
 			update_animation(
 				"stand_right" if hasOwnCandle
@@ -98,6 +90,14 @@ func _physics_process(delta):
 				"stand_left" if hasOwnCandle
 				else "stand_left_no_candle"
 			)
+
+func _physics_process(delta):
+	# Add gravity
+	if not is_on_floor():
+		velocity.y += GRAVITY * delta
+	
+	if not in_non_moving_animation():
+		_handle_normal_input(delta)
 	
 	if in_non_moving_animation() and is_finite(non_moving_animation_timer):
 		non_moving_animation_timer -= delta
