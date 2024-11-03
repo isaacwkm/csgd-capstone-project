@@ -11,6 +11,8 @@ const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 const GRAVITY = 980.0  # Define gravity here
 
+@export var throw_strength: float = 3.0
+
 const NON_MOVING_ANIMATION_DURATIONS := {
 	&'break_candle_left': 0.25,
 	&'break_candle_right': 0.25,
@@ -91,6 +93,15 @@ func _handle_normal_input(_delta):
 				else "stand_left_no_candle"
 			)
 
+func _handle_windup_input(_delta):
+	var look = _get_look_position()
+	if look.x > global_position.x:
+		facingRight = true
+		update_animation(&'wind_up_right')
+	else:
+		facingRight = false
+		update_animation(&'wind_up_left')
+
 func _physics_process(delta):
 	# Add gravity
 	if not is_on_floor():
@@ -98,11 +109,38 @@ func _physics_process(delta):
 	
 	if not in_non_moving_animation():
 		_handle_normal_input(delta)
+	elif (
+		current_animation == &'wind_up_left' or
+		current_animation == &'wind_up_right'
+	):
+		_handle_windup_input(delta)
 	
 	if in_non_moving_animation() and is_finite(non_moving_animation_timer):
 		non_moving_animation_timer -= delta
 
 	move_and_slide()
+
+func _unhandled_input(event: InputEvent):
+	if event.is_action_pressed(&'throw') and heldItem:
+		if facingRight:
+			update_animation(&'wind_up_right')
+		else:
+			update_animation(&'wind_up_left')
+	if event.is_action_released(&'throw') and (
+		current_animation == &'wind_up_left' or
+		current_animation == &'wind_up_right'
+	):
+		var item = heldItem
+		heldItem = null
+		if item:
+			var look = _get_look_position()
+			item.apply_central_impulse(
+				(look - global_position)*throw_strength
+			)
+		if facingRight:
+			update_animation(&'throw_right')
+		else:
+			update_animation(&'throw_left')
 
 # Function to play animation only if it has changed
 func update_animation(animation_name):
@@ -149,3 +187,10 @@ func _spawn_candle() -> void:
 			update_animation(&'break_candle_left')
 		if not hasOwnCandle:
 			heldItem.hide_for_break_animation(non_moving_animation_timer)
+
+func _get_look_position() -> Vector2:
+	var reticle = get_node_or_null(^'../Reticle')
+	if reticle:
+		return reticle.global_position
+	else:
+		return get_global_mouse_position()
