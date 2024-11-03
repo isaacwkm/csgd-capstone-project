@@ -137,8 +137,8 @@ func _spawn_candle() -> void:
 		var new_candle = candle_scene.instantiate() as CarriableItem
 		new_candle.global_position = global_position
 		get_parent().add_child(new_candle)
-		new_candle._set_scale(
-			heldItem._get_scale() if heldItem is Candle
+		new_candle.set_light_scale(
+			heldItem.get_light_scale() if heldItem is Candle
 			else candle_init_scale
 		)
 		
