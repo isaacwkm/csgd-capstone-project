@@ -135,7 +135,7 @@ func _spawn_candle() -> void:
 		
 		# spawn a new candle and resize it to the held candle's scale
 		var new_candle = candle_scene.instantiate() as CarriableItem
-		new_candle.global_position = global_position + Vector2(50, 0) # change position if needed
+		new_candle.global_position = global_position
 		get_parent().add_child(new_candle)
 		new_candle._set_scale(
 			heldItem._get_scale() if heldItem is Candle
