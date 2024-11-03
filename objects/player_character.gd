@@ -134,11 +134,11 @@ func _dislodge_from_overlap():
 func _get_opposing_direction() -> Vector2:
 	var result = Vector2.UP
 	if Input.is_action_pressed(&'jump'):
-		result = Vector2.DOWN
+		result += 2*Vector2.DOWN
 	if Input.is_action_pressed(&'move_left'):
-		result += Vector2.RIGHT
+		result += Vector2.RIGHT + Vector2.DOWN
 	if Input.is_action_pressed(&'move_right'):
-		result += Vector2.LEFT
+		result += Vector2.LEFT + Vector2.DOWN
 	return result
 
 func _unhandled_input(event: InputEvent):
