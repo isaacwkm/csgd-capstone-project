@@ -1,8 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://cdv7xd3dh42d0"]
+[gd_scene load_steps=8 format=3 uid="uid://cdv7xd3dh42d0"]
 
 [ext_resource type="Texture2D" uid="uid://c10ag7q27cfy6" path="res://textures/player_character_placeholder/player_character_placeholder_candle_8.tres" id="1_lduu1"]
 [ext_resource type="Script" path="res://objects/candle.gd" id="1_r3eed"]
 [ext_resource type="PackedScene" uid="uid://du4aw7x0lt5a7" path="res://objects/collision_enabling_light.tscn" id="3_1623e"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_0q6ev"]
+bounce = 0.25
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_gdbwp"]
 animations = [{
@@ -24,6 +27,7 @@ size = Vector2(20, 42)
 [node name="Candle" type="RigidBody2D"]
 collision_layer = 4
 collision_mask = 4
+physics_material_override = SubResource("PhysicsMaterial_0q6ev")
 script = ExtResource("1_r3eed")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
