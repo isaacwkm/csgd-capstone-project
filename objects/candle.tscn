@@ -46,4 +46,5 @@ position = Vector2(0, -21)
 shape = SubResource("RectangleShape2D_yawxj")
 
 [node name="CollisionEnablingLight" parent="." instance=ExtResource("3_1623e")]
+position = Vector2(0, -34)
 scale = Vector2(0.378182, 0.378182)
