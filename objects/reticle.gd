@@ -6,11 +6,10 @@ extends Sprite2D
 
 func _unhandled_input(event: InputEvent):
 	if event is InputEventMouseMotion:
-		var camera = get_viewport().get_camera_2d()
-		global_position = event.global_position + ((
-			camera.get_screen_center_position() -
-			get_viewport_rect().size/2
-		) if camera else Vector2.ZERO)
+		global_position = (
+			(get_viewport_rect()*get_canvas_transform()).position +
+			event.global_position
+		)
 
 func _process(delta: float):
 	var input = Vector2(

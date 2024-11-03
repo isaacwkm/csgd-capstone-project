@@ -1,7 +1,7 @@
 class_name HintEsc
 extends Hint
 
-@onready var _player_character := $'../PlayerCharacter' as PlayerCharacter
+@onready var _player_character := $'../../PlayerCharacter' as PlayerCharacter
 
 func _should_open():
 	var rect = get_viewport().get_visible_rect()
