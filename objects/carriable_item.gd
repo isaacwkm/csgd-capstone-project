@@ -16,7 +16,7 @@ func _physics_process(_delta: float) -> void:
 		global_position = _player.global_position + Vector2.UP * 32
 		linear_velocity = _player.get_real_velocity()
 
-func _input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_released("pick_up"):
 		if _player.heldItem == self:
 			_player.heldItem = null

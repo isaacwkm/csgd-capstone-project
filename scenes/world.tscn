@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=4 uid="uid://bp24rmcwprehi"]
+[gd_scene load_steps=7 format=4 uid="uid://bp24rmcwprehi"]
 
 [ext_resource type="PackedScene" uid="uid://cci2vignjb6u4" path="res://objects/player_character.tscn" id="1_grg2j"]
 [ext_resource type="Material" uid="uid://bweju42buun6p" path="res://shaders/only_visible_in_light.tres" id="1_h8m8k"]
 [ext_resource type="TileSet" uid="uid://dg1io4ume71hh" path="res://textures/tileset/tileset.tres" id="2_13mpi"]
 [ext_resource type="Script" path="res://objects/screen_overlay.gd" id="2_h6ad5"]
+[ext_resource type="PackedScene" uid="uid://b8iabltnlem5k" path="res://objects/reticle.tscn" id="6_id7ps"]
 [ext_resource type="PackedScene" uid="uid://cdv7xd3dh42d0" path="res://objects/candle.tscn" id="6_of56d"]
 
 [node name="World" type="Node2D"]
@@ -26,3 +27,6 @@ position = Vector2(95, 604)
 
 [node name="Candle" parent="." instance=ExtResource("6_of56d")]
 position = Vector2(200, 604)
+
+[node name="Reticle" parent="." instance=ExtResource("6_id7ps")]
+position = Vector2(337, 200)
