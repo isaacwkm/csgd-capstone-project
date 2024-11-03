@@ -101,14 +101,9 @@ func _handle_windup_input(_delta):
 	var look = _get_look_position()
 	if look.x > global_position.x:
 		facingRight = true
-		update_animation(
-			&'wind_up_right' if hasOwnCandle else &'wind_up_right_no_candle'
-		)
 	else:
 		facingRight = false
-		update_animation(
-			&'wind_up_left' if hasOwnCandle else &'wind_up_left_no_candle'
-		)
+	do_wind_up_animation()
 
 func _physics_process(delta):
 	# Add gravity
@@ -117,12 +112,7 @@ func _physics_process(delta):
 	
 	if not in_non_moving_animation():
 		_handle_normal_input(delta)
-	elif (
-		current_animation == &'wind_up_left' or
-		current_animation == &'wind_up_right' or
-		current_animation == &'wind_up_left_no_candle' or
-		current_animation == &'wind_up_right_no_candle'
-	):
+	elif in_wind_up_animation():
 		_handle_windup_input(delta)
 	
 	if in_non_moving_animation() and is_finite(non_moving_animation_timer):
@@ -132,20 +122,8 @@ func _physics_process(delta):
 
 func _unhandled_input(event: InputEvent):
 	if event.is_action_pressed(&'throw') and heldItem:
-		if facingRight:
-			update_animation(
-				&'wind_up_right' if hasOwnCandle else &'wind_up_right_no_candle'
-			)
-		else:
-			update_animation(
-				&'wind_up_left' if hasOwnCandle else &'wind_up_left_no_candle'
-			)
-	elif event.is_action_released(&'throw') and (
-		current_animation == &'wind_up_left' or
-		current_animation == &'wind_up_right' or
-		current_animation == &'wind_up_left_no_candle' or
-		current_animation == &'wind_up_right_no_candle'
-	):
+		do_wind_up_animation()
+	elif event.is_action_released(&'throw') and in_wind_up_animation():
 		var item = heldItem
 		heldItem = null
 		if item:
@@ -153,14 +131,7 @@ func _unhandled_input(event: InputEvent):
 			item.apply_central_impulse(
 				(look - global_position)*throw_strength
 			)
-		if facingRight:
-			update_animation(
-				&'throw_right' if hasOwnCandle else &'throw_right_no_candle'
-			)
-		else:
-			update_animation(
-				&'throw_left' if hasOwnCandle else &'throw_left_no_candle'
-			)
+		do_throw_animation()
 
 # Function to play animation only if it has changed
 func update_animation(animation_name):
@@ -172,6 +143,34 @@ func update_animation(animation_name):
 			non_moving_animation_timer = (
 				NON_MOVING_ANIMATION_DURATIONS[current_animation]
 			)
+
+func do_throw_animation():
+	if facingRight:
+		update_animation(
+			&'throw_right' if hasOwnCandle else &'throw_right_no_candle'
+		)
+	else:
+		update_animation(
+			&'throw_left' if hasOwnCandle else &'throw_left_no_candle'
+		)
+
+func do_wind_up_animation():
+	if facingRight:
+		update_animation(
+			&'wind_up_right' if hasOwnCandle else &'wind_up_right_no_candle'
+		)
+	else:
+		update_animation(
+			&'wind_up_left' if hasOwnCandle else &'wind_up_left_no_candle'
+		)
+
+func in_wind_up_animation():
+	return (
+		current_animation == &'wind_up_left' or
+		current_animation == &'wind_up_right' or
+		current_animation == &'wind_up_left_no_candle' or
+		current_animation == &'wind_up_right_no_candle'
+	)
 
 func in_non_moving_animation():
 	return NON_MOVING_ANIMATION_DURATIONS.has(current_animation) and (
