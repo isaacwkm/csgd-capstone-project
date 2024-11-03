@@ -12,8 +12,8 @@ const JUMP_VELOCITY = -400.0
 const GRAVITY = 980.0  # Define gravity here
 
 const NON_MOVING_ANIMATION_DURATIONS := {
-	&'break_candle_left': 0.5,
-	&'break_candle_right': 0.5,
+	&'break_candle_left': 0.25,
+	&'break_candle_right': 0.25,
 	&'throw_left': 0.5,
 	&'throw_right': 0.5,
 	&'wind_up_left': INF,
