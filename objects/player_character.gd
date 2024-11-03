@@ -18,8 +18,12 @@ const NON_MOVING_ANIMATION_DURATIONS := {
 	&'break_candle_right': 0.25,
 	&'throw_left': 0.5,
 	&'throw_right': 0.5,
+	&'throw_left_no_candle': 0.5,
+	&'throw_right_no_candle': 0.5,
 	&'wind_up_left': INF,
-	&'wind_up_right': INF
+	&'wind_up_right': INF,
+	&'wind_up_left_no_candle': INF,
+	&'wind_up_right_no_candle': INF
 }
 
 var hasOwnCandle = false
@@ -97,10 +101,14 @@ func _handle_windup_input(_delta):
 	var look = _get_look_position()
 	if look.x > global_position.x:
 		facingRight = true
-		update_animation(&'wind_up_right')
+		update_animation(
+			&'wind_up_right' if hasOwnCandle else &'wind_up_right_no_candle'
+		)
 	else:
 		facingRight = false
-		update_animation(&'wind_up_left')
+		update_animation(
+			&'wind_up_left' if hasOwnCandle else &'wind_up_left_no_candle'
+		)
 
 func _physics_process(delta):
 	# Add gravity
@@ -111,7 +119,9 @@ func _physics_process(delta):
 		_handle_normal_input(delta)
 	elif (
 		current_animation == &'wind_up_left' or
-		current_animation == &'wind_up_right'
+		current_animation == &'wind_up_right' or
+		current_animation == &'wind_up_left_no_candle' or
+		current_animation == &'wind_up_right_no_candle'
 	):
 		_handle_windup_input(delta)
 	
@@ -123,12 +133,18 @@ func _physics_process(delta):
 func _unhandled_input(event: InputEvent):
 	if event.is_action_pressed(&'throw') and heldItem:
 		if facingRight:
-			update_animation(&'wind_up_right')
+			update_animation(
+				&'wind_up_right' if hasOwnCandle else &'wind_up_right_no_candle'
+			)
 		else:
-			update_animation(&'wind_up_left')
-	if event.is_action_released(&'throw') and (
+			update_animation(
+				&'wind_up_left' if hasOwnCandle else &'wind_up_left_no_candle'
+			)
+	elif event.is_action_released(&'throw') and (
 		current_animation == &'wind_up_left' or
-		current_animation == &'wind_up_right'
+		current_animation == &'wind_up_right' or
+		current_animation == &'wind_up_left_no_candle' or
+		current_animation == &'wind_up_right_no_candle'
 	):
 		var item = heldItem
 		heldItem = null
@@ -138,9 +154,13 @@ func _unhandled_input(event: InputEvent):
 				(look - global_position)*throw_strength
 			)
 		if facingRight:
-			update_animation(&'throw_right')
+			update_animation(
+				&'throw_right' if hasOwnCandle else &'throw_right_no_candle'
+			)
 		else:
-			update_animation(&'throw_left')
+			update_animation(
+				&'throw_left' if hasOwnCandle else &'throw_left_no_candle'
+			)
 
 # Function to play animation only if it has changed
 func update_animation(animation_name):
