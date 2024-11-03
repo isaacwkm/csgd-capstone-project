@@ -3,6 +3,9 @@ extends CharacterBody2D
 
 @onready var _animated_sprite = $AnimatedSprite2D
 
+# Preload the candle scene
+@export var candle_scene: PackedScene = preload("res://objects/candle.tscn")
+
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 const GRAVITY = 980.0  # Define gravity here
@@ -66,3 +69,21 @@ func update_animation(animation_name):
 	if current_animation != animation_name:
 		_animated_sprite.play(animation_name)
 		current_animation = animation_name
+
+# Spawn a new candle when "Q" is pressed
+func _process(_delta: float) -> void:
+	if Input.is_action_just_pressed("break_candle") and hasCandle:
+		_spawn_candle()
+
+# Function to spawn a new candle
+func _spawn_candle() -> void:
+	if heldItem:
+		# resize held candle
+		heldItem.initialize(0.5)
+		
+		# spawn a new candle and resize it to the held candle's scale
+		var new_candle = candle_scene.instantiate() as CarriableItem
+		new_candle.global_position = global_position + Vector2(50, 0) # change position if needed
+		new_candle.initialize(0.5)
+		get_parent().add_child(new_candle)
+		new_candle._set_scale(heldItem._get_scale())
