@@ -131,7 +131,7 @@ func _process(_delta: float) -> void:
 func _spawn_candle() -> void:
 	if hasOwnCandle or (heldItem is Candle):
 		# resize held candle
-		if heldItem is Candle: heldItem.initialize(0.5)
+		if not hasOwnCandle: heldItem.initialize(0.5)
 		
 		# spawn a new candle and resize it to the held candle's scale
 		var new_candle = candle_scene.instantiate() as CarriableItem
@@ -147,3 +147,5 @@ func _spawn_candle() -> void:
 			update_animation(&'break_candle_right')
 		else:
 			update_animation(&'break_candle_left')
+		if not hasOwnCandle:
+			heldItem.hide_for_break_animation(non_moving_animation_timer)
